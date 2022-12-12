@@ -7,20 +7,19 @@ function Student(name, gender, age) {
         this.subject = subjectName;
       }
       Student.prototype.addMarks = function (...marks) {
-        this.marks = [...marks];
+        if (this.excluded === undefined) {
+          this.marks.push(...marks);
+        }
       }
       Student.prototype.getAverage = function () {
         if(this.marks.length === 0){
         return 0
-        } else {
-            let summ = 0;
-            let number = 0;
-            for(let i = 0; i < this.marks.length; i++){
-                summ = summ + this.marks[i];
-                number = number + 1;
-            }
-            return summ / number
         }
+        let summ = 0;
+        for(let i = 0; i < this.marks.length; i++){
+          summ = summ + this.marks[i];
+        }
+        return summ / this.marks.length
       }
       Student.prototype.exclude = function (reason) {
         delete this.subject;
